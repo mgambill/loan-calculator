@@ -1,0 +1,11 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.router-link-exact-active ,
+.router-link-active  {
+  @apply text-indigo-600;
+}
+

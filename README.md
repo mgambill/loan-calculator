@@ -1,4 +1,10 @@
-# diet-planner
+# Loan Calculator
+
+A simple page to determine payments for a given loan and rate.
+
+## Why??
+
+Tired of every page I visited having ads or extra stuff.
 
 ## Project setup
 ```
