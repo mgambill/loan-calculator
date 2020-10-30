@@ -1,5 +1,6 @@
-const currency = (value, prefix = "$") => {
-  return `${prefix}${(+value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`
+const currency = (value, prefix = "$", cents = 2) => {
+  var x = `${prefix}${(+value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`
+  return cents == 0 ? x.split(".")[0] : x
 }
 const round = (value, decimals = 3) => {
   return Number(Math.round(value + "e" + decimals) + "e-" + decimals)
