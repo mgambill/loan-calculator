@@ -9,3 +9,8 @@
   @apply text-indigo-600;
 }
 
+.border-r-dashed {
+  
+  border-right-style: dashed;
+}
+
