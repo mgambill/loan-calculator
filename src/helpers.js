@@ -1,6 +1,6 @@
 const clean = v => +`${v}`.replace(/[^0-9.]/g, "")
 
-const currency = (value, prefix = "$ ", cents = 2) => {
+const currency = (value, cents = 2) => {
   // var x = `${prefix}${(+value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`
   // return cents == 0 ? x.split(".")[0] : x
 

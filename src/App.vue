@@ -12,8 +12,8 @@ div.p-4
     div
       label.block.text-sm.font-medium.leading-5.text-gray-700(for="principal") Loan amount/balance
       .mt-1.relative.rounded-md.shadow-sm
-        .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none: span.text-gray-500(class="sm:text-sm sm:leading-5") $
-        CurrencyInput.form-input.block.w-full.pl-7.pr-12.text-gray-600(class="sm:text-sm sm:leading-5" v-model="principal" placeholder="3500")
+        //-.absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none: span.text-gray-500(class="sm:text-sm sm:leading-5") $
+        CurrencyInput.form-input.block.w-full.px-3.py-2.text-gray-600(class="sm:text-sm sm:leading-5" v-model="principal" placeholder="3500")
     div
       label.block.text-sm.font-medium.leading-5.text-gray-700(for="rate") Annual interest rate
       .mt-1.flex.rounded-md.shadow-sm
