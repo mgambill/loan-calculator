@@ -133,11 +133,6 @@ export default {
 
       return { year: dy, month: dm, text: "" }
     },
-
-    currency(value, prefix) {
-      if (isNaN(value)) return null
-      return currency(value, prefix, this.cents ? 2 : 0)
-    },
     round
     //https://www.thecalculator.co/finance/Loan-Interest-Calculator-527.html
   }

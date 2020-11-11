@@ -79,9 +79,9 @@ export default {
         .join(" ")
         .trimRight()
     },
-    currency(value, prefix) {
+    currency(value) {
       if (isNaN(value)) return null
-      return currency(value, prefix, this.cents ? 2 : 0)
+      return currency(value, this.cents ? 2 : 0)
     },
     round,
     //https://www.thecalculator.co/finance/Loan-Interest-Calculator-527.html
