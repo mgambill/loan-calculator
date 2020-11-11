@@ -13,12 +13,7 @@ div.p-4
       label.block.text-sm.font-medium.leading-5.text-gray-700(for="principal") Loan amount/balance
       .mt-1.relative.rounded-md.shadow-sm
         .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none: span.text-gray-500(class="sm:text-sm sm:leading-5") $
-        input#principal.form-input.block.w-full.pl-7.pr-12(
-          v-cleave
-          v-model="principal"
-          placeholder="3500"
-          class="sm:text-sm sm:leading-5")
-
+        CurrencyInput.form-input.block.w-full.pl-7.pr-12.text-gray-600(class="sm:text-sm sm:leading-5" v-model="principal" placeholder="3500")
     div
       label.block.text-sm.font-medium.leading-5.text-gray-700(for="rate") Annual interest rate
       .mt-1.flex.rounded-md.shadow-sm
@@ -42,8 +37,6 @@ div.p-4
       .mt-1.relative.rounded-md.shadow-sm
         .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none: span.text-gray-500(class="sm:text-sm sm:leading-5") $
         input#maximum.form-input.block.w-full.pl-7.pr-12( v-model.number="max" placeholder="3500" class="sm:text-sm sm:leading-5")
-
-  //-pre  {{ { $data, pmt, minResult, min } }}
   .col-span-3
     .flex.flex-col.mt-6
       .border-2
@@ -55,18 +48,18 @@ div.p-4
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Total interest paid
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500
             span(class="hidden md:inline-block") Average
-            span(class="sm:hidden") Avg
-            span.ml-1  monthly interest paid
+            span(class="md:hidden") Avg
+            span.ml-1 monthly interest paid
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Total paid for the loan
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500
-            span(class="hidden md:inline-block") Number
-            span(class="sm:hidden") #
+            span(class="hidden md:inline-block") Number of
+            span(class="md:hidden") #
             span.ml-1 monthly payments
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Estimated payoff date
 
           template(v-for="item in items")
-            AppColumn(:cents="cents" :principal="principalRaw" :rate="rate" :editable="item.editable" :def="item.def")
-          AppColumn(:cents="cents" :principal="principalRaw" :rate="rate" :initialDuration="duration")
+            AppColumn(:cents="cents" :principal="principal" :rate="rate" :months="months" :editable="item.editable" :def="item.def")
+          AppColumn(:cents="cents" :principal="principal" :rate="rate" :months="months")
 
       div.mt-2
           label
@@ -75,28 +68,12 @@ div.p-4
 
 </template>
 <script>
+import CurrencyInput from "./CurrencyInput.vue"
 import Column from "./Column.vue"
-import Cleave from "cleave.js"
 import { currency, round } from "./helpers"
 export default {
-  components: { AppColumn: Column },
-  directives: {
-    cleave: {
-      mounted: (el, binding) => {
-        const vm = binding.instance
-        el.cleave = new Cleave(el, binding.value || { numeral: true })
-        console.log("el", vm, { binding })
-      },
-      updated: (el, binding) => {
-        const event = new Event("input", { bubbles: true })
-        console.log(event, binding, el.cleave.properties.result)
-        setTimeout(function() {
-          el.value = el.cleave.properties.result
-          el.dispatchEvent(event)
-        }, 100)
-      }
-    }
-  },
+  components: { AppColumn: Column, CurrencyInput },
+
   data() {
     return {
       options: { numeral: true, numeralThousandsGroupStyle: "thousand" },
@@ -107,21 +84,17 @@ export default {
           def: { down: 0, label: "Orig Payment" }
         }
       ],
-      principal: 43344,
-      down: 3000,
-      rate: 5.5,
+      principal: 200000.3,
+      down: 0,
+      rate: 6,
       max: 300,
-      duration: 72,
-      durationType: "M",
+      duration: 15,
+      durationType: "Y",
       mode: "duration",
-      cents: true
+      cents: false
     }
   },
   computed: {
-    principalRaw() {
-      const value = +("" + this.principal).replace(/\D/, "")
-      return isNaN(value) ? 0 : value
-    },
     months() {
       return this.durationType === "M" ? this.duration : this.duration * 12
     },

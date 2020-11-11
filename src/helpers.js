@@ -1,6 +1,18 @@
-const currency = (value, prefix = "$", cents = 2) => {
-  var x = `${prefix}${(+value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`
-  return cents == 0 ? x.split(".")[0] : x
+const clean = v => +`${v}`.replace(/[^0-9.]/g, "")
+
+const currency = (value, prefix = "$ ", cents = 2) => {
+  // var x = `${prefix}${(+value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`
+  // return cents == 0 ? x.split(".")[0] : x
+
+  if (value === null) return null
+
+  return new Intl.NumberFormat("EN-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: cents,
+    maximumFractionDigits: cents
+    //currencyDisplay: 'symbol',
+  }).format(clean(value))
 }
 const round = (value, decimals = 3) => {
   return Number(Math.round(value + "e" + decimals) + "e-" + decimals)
@@ -21,4 +33,4 @@ function pmt(principle, rate, months) {
   return principle * interest * ratio
 }
 
-export { currency, round, pmt, nper }
+export { clean, currency, round, pmt, nper }
