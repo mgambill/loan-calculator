@@ -1,22 +1,22 @@
 <template lang="pug">
-div.px-3.py-4.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider.border-r.border-r-dashed {{ label }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right  {{ item.balance }}
+div.px-3.py-4.bg-gray-50.text-left.text-sm.leading-4.font-medium.text-gray-600.uppercase.tracking-wider.border-r.border-r-dashed.text-right {{ label }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.balance }}
 div.border-t.border-r.border-r-dashed
   template(v-if="editable")
     CurrencyInput.text-right.px-3.py-4.w-full.h-full(:prefix="true" v-model="down" :readonly="!editable" :placeholder="0" class="text-blue-500 bg-blue-50 hover:bg-blue-100")
 
   template(v-else)
-    .px-3.py-4.text-gray-600.text-right  {{ currency(down) }}
+    .px-3.py-4.text-gray-600.text-right {{ currency(down) }}
 div.border-t.border-r.border-r-dashed
   template(v-if="editable")
     CurrencyInput.text-right.px-3.py-4.w-full.h-full(:prefix="true" v-model="payment" :readonly="!editable" :placeholder="item.payment" class="text-blue-500 bg-blue-50 hover:bg-blue-100")
   template(v-else)
-    .px-3.py-4.text-gray-600.text-right  {{ item.payment }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right  {{ item.totalInterest }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right  {{ item.monthlyAverage }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right  {{ item.total }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600  {{ item.months }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600  {{ item.ts }}
+    .px-3.py-4.text-gray-600.text-right {{ item.payment }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.totalInterest }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.monthlyAverage }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.total }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.months }}
+div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.ts }}
 
 //-pre {{  { $data, months, principal, rate, item } }}
 
@@ -65,8 +65,13 @@ export default {
     timespan(months) {
       if (months === 0) return null
       const plural = (cnt, term, display = true) => `${display ? `${cnt} ` : ""}${cnt === 1 ? term : term + "s"}`
-      const _years = Math.floor(months / 12)
-      const _months = Math.ceil(months % 12)
+      let _years = Math.floor(months / 12)
+      let _months = Math.ceil(months % 12)
+      // if months is 12 add a year and set month to 0
+      if (_months === 12) {
+        _years++
+        _months = 0
+      }
       const hy = _years > 0
       const hm = _months > 0
       const y = hy ? plural(_years, "year") : null

@@ -32,16 +32,11 @@ div.p-4
         template(v-if="this.durationType !== 'M'") Months: {{ months }}
         template(v-else) Years: {{ years }} {{ }}
 
-    //-div
-      label.block.text-sm.font-medium.leading-5.text-gray-700(for="maximum") Custom monthly payment
-      .mt-1.relative.rounded-md.shadow-sm
-        .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none: span.text-gray-500(class="sm:text-sm sm:leading-5") $
-        input#maximum.form-input.block.w-full.pl-7.pr-12( v-model.number="max" placeholder="3500" class="sm:text-sm sm:leading-5")
   .col-span-3
     .flex.flex-col.mt-6
       .border-2
         .grid.grid-flow-col.bg-white.auto-cols-fr(style="grid-template-rows: auto repeat(8, min-content);")
-          div.bg-gray-300.flex.items-center.p-3: .text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider Payment Details
+          div.bg-gray-300.flex.items-center.p-3
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Balance
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Down payment
           div.border-t.border-r.bg-gray-50.px-3.py-4.cols-auto.text-sm.text-gray-500 Payment
@@ -79,9 +74,8 @@ export default {
       options: { numeral: true, numeralThousandsGroupStyle: "thousand" },
       items: [
         {
-          label: "Original Payment",
           editable: false,
-          def: { down: 0, label: "Orig Payment" }
+          def: { down: 0, label: "Default" }
         }
       ],
       principal: 200000.3,
