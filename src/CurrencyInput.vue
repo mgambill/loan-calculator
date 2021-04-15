@@ -1,5 +1,5 @@
 <template lang="pug">
-input(v-currency v-model.lazy="localValue")
+input(v-currency v-model.lazy="localValue" type="text")
 </template>
 
 <script>

@@ -1,13 +1,24 @@
-// tailwind.config.js
+const { trueGray, green, blue, white } = require('tailwindcss/colors')
+
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
-  plugins: [require("@tailwindcss/ui")],
+  mode: 'jit',
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
+    colors: {
+      transparent: 'transparent',
+      white: white,
+      green: green,
+      blue: blue,
+      gray: trueGray
+    },
     extend: {
-      gridTemplateRows: {
-        // Simple 8 row grid
-        "8": "repeat(8, minmax(0, 1fr))"
-      }
-    }
-  }
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

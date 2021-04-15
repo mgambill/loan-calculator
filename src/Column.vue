@@ -1,22 +1,22 @@
 <template lang="pug">
-div.px-3.py-4.bg-gray-50.text-left.text-sm.leading-4.font-medium.text-gray-600.uppercase.tracking-wider.border-r.border-r-dashed.text-right {{ label }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.balance }}
-div.border-t.border-r.border-r-dashed
+div.px-3.py-4.bg-gray-50.text-right.text-sm.leading-4.font-medium.text-gray-600.uppercase.tracking-wider.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-300") {{ label }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400") {{ item.balance }}
+div.bg-white.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400")
   template(v-if="editable")
-    CurrencyInput.text-right.px-3.py-4.w-full.h-full(:prefix="true" v-model="down" :readonly="!editable" :placeholder="0" class="text-blue-500 bg-blue-50 hover:bg-blue-100")
+    CurrencyInput.text-right.px-3.py-4.w-full.h-full.border-2px.border-transparent.z-10(:prefix="true" v-model="down" :readonly="!editable" :placeholder="0" class="text-blue-500 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900 dark:text-blue-300")
 
   template(v-else)
     .px-3.py-4.text-gray-600.text-right {{ currency(down) }}
-div.border-t.border-r.border-r-dashed
+div.bg-white.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400")
   template(v-if="editable")
-    CurrencyInput.text-right.px-3.py-4.w-full.h-full(:prefix="true" v-model="payment" :readonly="!editable" :placeholder="item.payment" class="text-blue-500 bg-blue-50 hover:bg-blue-100")
+    CurrencyInput.text-right.px-3.py-4.w-full.h-full.border-2px.border-transparent.z-10(:prefix="true" v-model="payment" :readonly="!editable" :placeholder="item.payment" class="text-blue-500 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900 dark:text-blue-300")
   template(v-else)
     .px-3.py-4.text-gray-600.text-right {{ item.payment }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.totalInterest }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.monthlyAverage }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.total }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.months }}
-div.border-t.border-r.border-r-dashed.px-3.py-4.text-gray-600.text-right {{ item.ts }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500") {{ item.totalInterest }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500") {{ item.monthlyAverage }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500") {{ item.total }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500") {{ item.months }}
+div.bg-white.px-3.py-4.text-gray-600.text-right.-mr-px.border-r.border-dashed.border-gray-300(class="dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500") {{ item.ts }}
 
 //-pre {{  { $data, months, principal, rate, item } }}
 
